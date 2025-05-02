@@ -3,5 +3,7 @@ nav:
   - Home: index.md
   - Lab 1:
       - Main: lr_1/lab.md
+  - Lab 2:
+      - Main: lr_2/lab.md
 theme:
   name: material
