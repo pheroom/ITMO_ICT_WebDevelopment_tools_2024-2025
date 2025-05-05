@@ -1,6 +1,7 @@
 import time
 import multiprocessing
 from parser import parse_and_save_page
+from db import init_db
 import requests
 from urls import urls
 
@@ -13,6 +14,8 @@ def _parse_and_save(url_list):
 
 
 def main():
+    init_db()
+
     num_processes = 3
     chunk_size = (len(urls) + num_processes - 1) // num_processes
     chunks = [urls[i:i + chunk_size] for i in range(0, len(urls), chunk_size)]

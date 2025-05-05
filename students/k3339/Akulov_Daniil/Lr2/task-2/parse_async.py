@@ -1,7 +1,8 @@
 import time
 import asyncio
 import aiohttp
-from parser import parse_and_save_page
+from parser import async_parse_and_save_page
+from db import async_init_db
 from urls import urls
 
 async def fetch(session, url):
@@ -14,7 +15,7 @@ async def _parse_and_save(url):
     async with aiohttp.ClientSession() as session:
         html_data = await fetch(session, url)
         if html_data:
-            parse_and_save_page(html_data)
+            await async_parse_and_save_page(html_data)
 
 
 async def parse_chunk(chunk):
@@ -23,6 +24,8 @@ async def parse_chunk(chunk):
 
 
 async def main():
+    await async_init_db()
+
     num_chunks = 3
     chunk_size = (len(urls) + num_chunks - 1) // num_chunks
     chunks = [urls[i:i+chunk_size] for i in range(0, len(urls), chunk_size)]

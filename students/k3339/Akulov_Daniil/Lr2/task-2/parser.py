@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from db import get_session
+from db import SessionLocal, AsyncSessionLocal
 from models import Hackathon
 from datetime import datetime, timedelta
 
@@ -25,7 +25,20 @@ def parse_page(html_data):
 
 def parse_and_save_page(html_data):
     data = parse_page(html_data)
-    with next(get_session()) as session:
+    session = SessionLocal()
+    hackathon = Hackathon(
+        name=data["title"],
+        description=data["description"],
+        start_date=datetime.now(),
+        end_date=datetime.now() + timedelta(days=7),
+    )
+    session.add(hackathon)
+    session.commit()
+
+
+async def async_parse_and_save_page(html_data):
+    data = parse_page(html_data)
+    async with AsyncSessionLocal() as session:
         hackathon = Hackathon(
             name=data["title"],
             description=data["description"],
@@ -33,4 +46,4 @@ def parse_and_save_page(html_data):
             end_date=datetime.now() + timedelta(days=7),
         )
         session.add(hackathon)
-        session.commit()
+        await session.commit()
