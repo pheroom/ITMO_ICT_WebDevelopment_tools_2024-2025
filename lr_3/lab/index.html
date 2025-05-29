@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../../lr_2/lab/">
+      
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -16,7 +18,7 @@
     
     
       
-        <title>Pw - WEB-programming</title>
+        <title>Main - WEB-programming</title>
       
     
     
@@ -58,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#11-13" class="md-skip">
+        <a href="#3-fastapi-docker" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pw
+              Main
             
           </span>
         </div>
@@ -247,7 +249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lab/" class="md-nav__link">
+      <a href="../../lr_1/lab/" class="md-nav__link">
         
   
   
@@ -342,18 +344,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -369,7 +373,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Lab 3
@@ -380,10 +384,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../lr_3/lab/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Main
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -394,6 +418,48 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#3-fastapi-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Лабораторная работа 3. Упаковка FastAPI приложения в Docker, Работа с источниками данных и Очереди
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Лабораторная работа 3. Упаковка FastAPI приложения в Docker, Работа с источниками данных и Очереди">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Выполнение
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -431,11 +497,26 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#11-13" class="md-nav__link">
+  <a href="#3-fastapi-docker" class="md-nav__link">
     <span class="md-ellipsis">
-      Практические задания 1.1-1.3
+      Лабораторная работа 3. Упаковка FastAPI приложения в Docker, Работа с источниками данных и Очереди
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Лабораторная работа 3. Упаковка FastAPI приложения в Docker, Работа с источниками данных и Очереди">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Выполнение
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -455,9 +536,137 @@
 
 
 
-  <h1>Pw</h1>
+  <h1>Main</h1>
 
-<h2 id="11-13">Практические задания 1.1-1.3</h2>
+<h2 id="3-fastapi-docker">Лабораторная работа 3. Упаковка FastAPI приложения в Docker, Работа с источниками данных и Очереди</h2>
+<h3 id="_1">Выполнение</h3>
+<p><em>Dockerfile</em> приложения FastApi:</p>
+<pre><code>FROM python:3.13-slim
+
+WORKDIR /app
+
+COPY requirements.txt /app/
+
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+COPY ./app /app
+
+EXPOSE 8000
+
+CMD [&quot;uvicorn&quot;, &quot;app:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8000&quot;]
+</code></pre>
+<p><em>Dockerfile</em> приложения парсера:</p>
+<pre><code>FROM python:3.11-slim
+
+WORKDIR /parser
+
+COPY requirements.txt /parser/
+
+RUN pip install --upgrade pip \
+ &amp;&amp; pip install --no-cache-dir -r /parser/requirements.txt
+
+COPY ./parser /parser
+
+EXPOSE 8001
+
+CMD [&quot;uvicorn&quot;, &quot;app:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8001&quot;]
+</code></pre>
+<p><em>docker-compose.yaml</em>:</p>
+<pre><code>services:
+  postgres:
+    image: postgres:15
+    env_file:
+      - .env
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - &quot;5436:5432&quot;
+
+  api:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    ports:
+      - &quot;8000:8000&quot;
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+
+  parser:
+    build:
+      context: .
+      dockerfile: parser.Dockerfile
+    ports:
+      - &quot;8001:8001&quot;
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+      - api
+
+  redis:
+    image: redis
+    ports:
+      - &quot;6379:6379&quot;
+    volumes:
+      - redis:/data
+
+  celery:
+    build:
+      context: .
+      dockerfile: parser.Dockerfile
+    command: ['python', '-m', 'celery', '-A', 'celery_config.celery_app', 'worker']
+    depends_on:
+      - redis
+      - postgres
+      - parser
+    env_file:
+      - .env
+
+volumes:
+  postgres:
+  redis:
+</code></pre>
+<p><em>celery_config</em>:</p>
+<pre><code class="language-python">from celery import Celery
+from parser import parse_and_save_page
+import requests
+
+celery_app = Celery(&quot;parser&quot;, broker='redis://redis:6379/0', backend='redis://redis:6379/0')
+
+@celery_app.task(name=&quot;parse_from_url&quot;)
+def parse_from_url(url: str):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        hackathon = parse_and_save_page(response.text)
+    except requests.RequestException as e:
+        print(f&quot;Error processing {url}: {e}&quot;)
+</code></pre>
+<p><em>parser.app</em>:</p>
+<pre><code class="language-python">app = FastAPI()
+
+@app.post(&quot;/parse&quot;)
+def parse_url(data: ParseRequest):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        hackathon = parse_and_save_page(response.text)
+        return {&quot;hackathon&quot;: hackathon}
+    except requests.RequestException as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post(&quot;/parse-trigger&quot;)
+async def trigger_parse(data: ParseRequest):
+    task = parse_from_url.delay(data.url)
+    return {&quot;message&quot;: &quot;Parse task started&quot;, &quot;task_id&quot;: task.id}
+</code></pre>
+<p>Эндпоинты для взаимодействия с parser:
+<img alt="img1" src="../images/img_1.png" /></p>
+<p>Вызов выполнение таски из fastapi приложения:
+<img alt="img2" src="../images/img.png" /></p>
 
 
 
